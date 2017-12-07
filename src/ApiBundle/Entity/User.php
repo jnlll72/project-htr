@@ -2,11 +2,16 @@
 
 namespace ApiBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
+ *
+ * @ApiResource(itemOperations={
+ *     "get"={"method"="GET", "path"="/user/{id}", "requirements"={"id"="\d+"}},
+ * })
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\UserRepository")
@@ -121,5 +126,15 @@ class User
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    public function addMessage(Message $message)
+    {
+        $this->messages->add($message);
+    }
+
+    public function removeMessage(Message $message)
+    {
+        $this->messages->removeElement($message);
     }
 }

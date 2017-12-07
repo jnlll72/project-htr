@@ -2,11 +2,16 @@
 
 namespace ApiBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Forum
+ *
+ * @ApiResource(itemOperations={
+ *     "get"={"method"="GET", "path"="/forum/{id}", "requirements"={"id"="\d+"}},
+ * })
  *
  * @ORM\Table(name="forum")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\ForumRepository")
@@ -67,5 +72,15 @@ class Forum
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    public function addArticle(Article $article)
+    {
+        $this->articles->add($article);
+    }
+
+    public function removeArticle(Article $article)
+    {
+        $this->articles->removeElement($article);
     }
 }

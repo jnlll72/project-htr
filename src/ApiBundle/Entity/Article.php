@@ -2,11 +2,16 @@
 
 namespace ApiBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Article
+ *
+ * @ApiResource(itemOperations={
+ *     "get"={"method"="GET", "path"="/article/{id}", "requirements"={"id"="\d+"}},
+ * })
  *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\ArticleRepository")
@@ -80,5 +85,15 @@ class Article
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    public function addMessage(Message $message)
+    {
+        $this->messages->add($message);
+    }
+
+    public function removeMessage(Message $message)
+    {
+        $this->messages->removeElement($message);
     }
 }

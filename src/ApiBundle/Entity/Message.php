@@ -2,11 +2,16 @@
 
 namespace ApiBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Message
+ *
+ * @ApiResource(itemOperations={
+ *     "get"={"method"="GET", "path"="/message/{id}", "requirements"={"id"="\d+"}},
+ * })
  *
  * @ORM\Table(name="message")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\MessageRepository")

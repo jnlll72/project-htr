@@ -1,7 +1,10 @@
 api:
-    resource: "@ApiBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    resource: '.'
+    type: 'api_platform'
+    prefix: '/api'
+    defaults:
+        _format: json
+
 
 app:
     resource: '@AppBundle/Controller/'
